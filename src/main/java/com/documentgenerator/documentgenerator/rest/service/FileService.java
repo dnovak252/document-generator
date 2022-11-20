@@ -8,8 +8,6 @@ import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.documentgenerator.documentgenerator.db.entity.File;
-import com.documentgenerator.documentgenerator.db.repository.FileRepository;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.client.gridfs.model.GridFSFile;
@@ -31,12 +28,7 @@ public class FileService {
 	private GridFsTemplate template;
 	
 	@Autowired
-    private GridFsOperations operations;
-	
-	@Autowired
-    private FileRepository fileRepository;
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(FileService.class);
+	private GridFsOperations operations;
 	
 	public void generateFile(MultipartFile file) throws IOException {
 

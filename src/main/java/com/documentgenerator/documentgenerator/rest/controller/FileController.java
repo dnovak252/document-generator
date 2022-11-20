@@ -2,8 +2,6 @@ package com.documentgenerator.documentgenerator.rest.controller;
 
 import java.io.IOException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -23,8 +21,6 @@ import com.documentgenerator.documentgenerator.rest.service.FileService;
 @RestController
 public class FileController {
 	
-	 private static final Logger LOGGER = LoggerFactory.getLogger(FileController.class);
-	 
 	 @Autowired
 	 private FileService fileService;
 	 
@@ -34,18 +30,18 @@ public class FileController {
 	 }
 	 
 	 @PostMapping("/upload")
-	    public ResponseEntity<?> upload(@RequestParam("file")MultipartFile file) throws IOException {
-	        return new ResponseEntity<>(fileService.uploadFile(file), HttpStatus.OK);
-	    }
+	 public ResponseEntity<?> upload(@RequestParam("file")MultipartFile file) throws IOException {
+	     return new ResponseEntity<>(fileService.uploadFile(file), HttpStatus.OK);
+	 }
 	 
 	 @GetMapping("/download/{id}")
 	 public ResponseEntity<ByteArrayResource> download(@PathVariable String id) throws IOException {
-	        File file = fileService.downloadFile(id);
-
-	        return ResponseEntity.ok()
-	                .contentType(MediaType.parseMediaType(file.getFileType() ))
-	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFileName() + "\"")
-	                .body(new ByteArrayResource(file.getFile()));
-	    }
+		 File file = fileService.downloadFile(id);
+		
+		 return ResponseEntity.ok()
+				 .contentType(MediaType.parseMediaType(file.getFileType() ))
+		         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFileName() + "\"")
+		         .body(new ByteArrayResource(file.getFile()));
+	 }
 
 }
