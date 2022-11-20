@@ -66,8 +66,8 @@ public class FileService {
 	     Object fileID = template.store(file.getInputStream(), file.getOriginalFilename(), file.getContentType(), metadata);
 	     return "ID: " + fileID.toString();
     }
-
-    public File downloadFile(String id) throws IllegalStateException, IOException { 
+	
+	public File downloadFile(String id) throws IllegalStateException, IOException { 
         GridFSFile gridFSFile = template.findOne( new Query(Criteria.where("_id").is(id)) );
         
         File file = new File();
@@ -81,7 +81,6 @@ public class FileService {
 
         	file.setFile( IOUtils.toByteArray(operations.getResource(gridFSFile).getInputStream()) );
         }
-
         return file;
     }
 }
